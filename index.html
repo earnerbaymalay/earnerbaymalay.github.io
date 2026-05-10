@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER | Sovereign Neural Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        :root {
+            --bg: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --purple: #a855f7;
+            --cyan: #06b6d4;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
+            color: #e2e8f0;
+            font-family: 'Space Grotesk', sans-serif;
+            min-height: 100vh;
+        }
+
+        .liquid-glass {
+            background: var(--glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .accent-border {
+            position: relative;
+        }
+        .accent-border::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transition: width 0.5s ease;
+        }
+        .accent-border:hover::after {
+            width: 100%;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+    </style>
+</head>
+<body class="selection:bg-blue-500/30 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 liquid-glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl animate-pulse">🌌</span>
+            <span class="text-xl font-bold tracking-widest glow-text">AETHER</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium tracking-wider">
+            <a href="#vision" class="hover:text-blue-400 transition-colors accent-border">VISION</a>
+            <a href="#ecosystem" class="hover:text-blue-400 transition-colors accent-border">ECOSYSTEM</a>
+            <a href="#skills" class="hover:text-blue-400 transition-colors accent-border">SKILLS</a>
+            <a href="https://earnerbaymalay.github.io/sideload/" class="text-blue-400 hover:text-blue-300">SIDELOAD HUB</a>
+        </div>
+        <button class="liquid-glass px-5 py-2 rounded-full text-xs font-bold tracking-tighter hover:bg-white/5 transition-all">
+            CONNECT <i class="fa-solid fa-link ml-2"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto text-center">
+        <div class="inline-block liquid-glass px-4 py-1 rounded-full text-[10px] font-bold tracking-[0.3em] text-blue-400 mb-8 animate-float">
+            SOVEREIGN INTELLIGENCE FRAMEWORK
+        </div>
+        <h1 class="text-5xl md:text-8xl font-bold tracking-tighter mb-6 leading-none">
+            The World is <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 underline decoration-blue-500/30">Local.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+            Aether is a distributed, offline neural workstation designed for total data sovereignty. 
+            No cloud. No APIs. No tracking. Just raw intelligence on your terms.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://github.com/earnerbaymalay/aether-desktop" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3">
+                <i class="fa-brands fa-github text-xl"></i> GET AETHER DESKTOP
+            </a>
+            <a href="https://github.com/earnerbaymalay/aether-droid" class="liquid-glass hover:bg-white/5 px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3">
+                <i class="fa-brands fa-android text-xl text-green-400"></i> AETHER DROID
+            </a>
+        </div>
+    </header>
+
+    <!-- Ecosystem Section -->
+    <section id="ecosystem" class="py-20 px-6 md:px-12 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold tracking-widest mb-12 text-center md:text-left">THE ECOSYSTEM</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Aether Desktop -->
+            <div class="liquid-glass p-8 rounded-[2rem] card-hover flex flex-col justify-between h-[400px]">
+                <div>
+                    <div class="text-4xl mb-6">🖥️</div>
+                    <h3 class="text-2xl font-bold mb-3">Aether Desktop</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        High-performance Tauri workstation for Windows, Linux, and macOS. Real-time system tools and high-autonomy agents.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full font-bold">TAURI</span>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full font-bold">RUST</span>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full font-bold">OLLAMA</span>
+                    </div>
+                </div>
+                <a href="https://github.com/earnerbaymalay/aether-desktop" class="text-blue-400 text-xs font-bold flex items-center gap-2 group">
+                    VIEW SOURCE <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+                </a>
+            </div>
+
+            <!-- Aether Droid -->
+            <div class="liquid-glass p-8 rounded-[2rem] card-hover flex flex-col justify-between h-[400px]">
+                <div>
+                    <div class="text-4xl mb-6">📱</div>
+                    <h3 class="text-2xl font-bold mb-3">Aether Droid</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Offline AI workstation for Android via Termux. Orchestrates 4 model tiers for agentic project execution.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full font-bold">TERMUX</span>
+                        <span class="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full font-bold">LLAMA.CPP</span>
+                        <span class="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full font-bold">BASH</span>
+                    </div>
+                </div>
+                <a href="https://github.com/earnerbaymalay/aether-droid" class="text-green-400 text-xs font-bold flex items-center gap-2 group">
+                    VIEW SOURCE <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+                </a>
+            </div>
+
+            <!-- Edge Sentinel -->
+            <div class="liquid-glass p-8 rounded-[2rem] card-hover flex flex-col justify-between h-[400px]">
+                <div>
+                    <div class="text-4xl mb-6">🛡️</div>
+                    <h3 class="text-2xl font-bold mb-3">Edge Sentinel</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Real-time hardware telemetry and proactive AI security monitoring for your local nodes.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] bg-red-500/10 text-red-400 px-3 py-1 rounded-full font-bold">FASTAPI</span>
+                        <span class="text-[10px] bg-red-500/10 text-red-400 px-3 py-1 rounded-full font-bold">REACT</span>
+                        <span class="text-[10px] bg-red-500/10 text-red-400 px-3 py-1 rounded-full font-bold">WEBSOCKETS</span>
+                    </div>
+                </div>
+                <a href="https://github.com/earnerbaymalay/edge-sentinel" class="text-red-400 text-xs font-bold flex items-center gap-2 group">
+                    VIEW SOURCE <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 md:px-12 bg-white/5 border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="max-w-xl">
+                    <h2 class="text-3xl font-bold tracking-widest mb-6">NEURAL SKILLS</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Aether is powered by a modular "Skill" architecture. Portable Markdown definitions that allow any LLM to become an expert agent in seconds.
+                    </p>
+                </div>
+                <a href="#" class="liquid-glass px-6 py-3 rounded-xl text-xs font-bold flex items-center gap-3 hover:bg-white/10 transition-all">
+                    EXPLORE MARKETPLACE <i class="fa-solid fa-store text-blue-400"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="liquid-glass p-6 rounded-2xl flex items-center gap-4">
+                    <span class="text-xl">🕵️</span> <span class="text-xs font-bold tracking-wider">SECURITY AUDIT</span>
+                </div>
+                <div class="liquid-glass p-6 rounded-2xl flex items-center gap-4">
+                    <span class="text-xl">🛠️</span> <span class="text-xs font-bold tracking-wider">SYS-OPTIMIZER</span>
+                </div>
+                <div class="liquid-glass p-6 rounded-2xl flex items-center gap-4">
+                    <span class="text-xl">🧠</span> <span class="text-xs font-bold tracking-wider">RESEARCH AGENT</span>
+                </div>
+                <div class="liquid-glass p-6 rounded-2xl flex items-center gap-4">
+                    <span class="text-xl">🏗️</span> <span class="text-xs font-bold tracking-wider">ARCHITECT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5 mt-20 text-center">
+        <div class="text-3xl mb-8">🌌</div>
+        <p class="text-slate-500 text-sm mono uppercase tracking-[0.4em] mb-12">DECENTRALIZED // SECURE // SOVEREIGN</p>
+        <div class="flex justify-center gap-8 text-xl text-slate-400">
+            <a href="https://github.com/earnerbaymalay" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-discord"></i></a>
+        </div>
+        <p class="text-[10px] text-slate-600 mt-20 tracking-widest font-bold">
+            &copy; 2026 EARNERBAYMALAY | AETHER NEURAL SYSTEMS
+        </p>
+    </footer>
+
+</body>
+</html>
