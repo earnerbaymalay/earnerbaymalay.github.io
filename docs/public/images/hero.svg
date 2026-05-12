@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="160" viewBox="0 0 720 160">
+  <defs>
+    <linearGradient id="dGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFC131"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="720" height="160" fill="#0d1117" rx="12"/>
+  <!-- Desktop monitor -->
+  <g transform="translate(100,80)" filter="url(#glow)">
+    <rect x="-35" y="-25" width="70" height="45" rx="3" fill="none" stroke="url(#dGrad)" stroke-width="2"/>
+    <rect x="-30" y="-20" width="60" height="35" rx="2" fill="url(#dGrad)" opacity="0.1"/>
+    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="14" fill="#FFC131" font-weight="600">ai</text>
+    <line x1="-10" y1="20" x2="10" y2="20" stroke="#FFC131" stroke-width="2"/>
+    <line x1="0" y1="20" x2="0" y2="28" stroke="#FFC131" stroke-width="2"/>
+    <line x1="-15" y1="28" x2="15" y2="28" stroke="#FFC131" stroke-width="2"/>
+  </g>
+  <!-- Callouts -->
+  <text x="200" y="48" fill="#FFC131" font-family="monospace" font-size="12" font-weight="600">Tauri · Rust Backend · TypeScript Frontend</text>
+  <text x="200" y="68" fill="#94a3b8" font-family="sans-serif" font-size="12">macOS · Windows · Linux · xterm.js terminal</text>
+  <text x="200" y="98" fill="#58a6ff" font-family="monospace" font-size="12" font-weight="600">Connects to Ollama &amp; llama.cpp</text>
+  <text x="200" y="118" fill="#94a3b8" font-family="sans-serif" font-size="12">Local-first · Same models as Android version</text>
+  <text x="500" y="48" fill="#3fb950" font-family="monospace" font-size="12" font-weight="600">npm run tauri dev</text>
+  <text x="500" y="68" fill="#94a3b8" font-family="sans-serif" font-size="12">Node.js 18+ · Rust · Ollama required</text>
+  <text x="500" y="98" fill="#bc8cff" font-family="monospace" font-size="12" font-weight="600">Ecosystem Sync</text>
+  <text x="500" y="118" fill="#94a3b8" font-family="sans-serif" font-size="12">Same AetherVault · Same CalVer 26.04.2</text>
+  <line x1="470" y1="30" x2="470" y2="135" stroke="#21262d" stroke-width="1"/>
+</svg>
