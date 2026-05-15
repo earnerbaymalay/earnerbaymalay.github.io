@@ -7,17 +7,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --surface: rgba(20, 25, 35, 0.7);
+            --bg: #030303;
+            --surface: rgba(15, 18, 25, 0.6);
             --teal: #06b6d4;
             --purple: #8b5cf6;
+            --rose: #f43f5e;
             --text: #f8fafc;
             --text-dim: #94a3b8;
-            --border: rgba(255, 255, 255, 0.1);
-            --glow: 0 0 30px rgba(6, 182, 212, 0.3);
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: 0 0 30px rgba(6, 182, 212, 0.2);
+            --glow-purple: 0 0 30px rgba(139, 92, 246, 0.2);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-blur: blur(12px);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -26,161 +32,481 @@
             line-height: 1.6;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(20, 25, 35, 0.5) 0%, transparent 100%);
+            background-attachment: fixed;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
-            padding: 24px 48px;
+            align-items: center;
+            padding: 20px 60px;
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             position: fixed;
             width: 100%;
-            z-index: 100;
+            z-index: 1000;
+            background: rgba(3, 3, 3, 0.7);
         }
 
-        .logo { font-size: 24px; font-weight: 700; letter-spacing: 4px; color: var(--text); text-decoration: none; }
+        .logo { font-size: 24px; font-weight: 700; letter-spacing: 4px; color: var(--text); text-decoration: none; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; }
         .logo span { color: var(--teal); }
+        .logo::before { content: ''; width: 12px; height: 12px; background: var(--teal); border-radius: 2px; margin-right: 12px; box-shadow: var(--glow); animation: pulse 2s infinite; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
         
-        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 32px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--teal); }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; font-weight: 600; }
+        .nav-links a:hover { color: var(--teal); text-shadow: var(--glow); }
 
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 24px;
+            padding: 160px 24px 100px;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--teal), transparent);
         }
 
         .hero-img {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
-            margin-bottom: 40px;
-            filter: drop-shadow(var(--glow));
-            animation: float 6s ease-in-out infinite;
+            margin-bottom: 60px;
+            filter: drop-shadow(0 0 50px rgba(6, 182, 212, 0.2));
+            animation: float 8s ease-in-out infinite;
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(1deg); }
         }
 
-        h1 { font-size: 64px; font-weight: 700; margin-bottom: 24px; letter-spacing: -1px; }
-        h1 span { background: linear-gradient(90deg, var(--teal), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h1 { font-size: 88px; font-weight: 700; margin-bottom: 24px; letter-spacing: -4px; line-height: 0.95; }
+        h1 span { background: linear-gradient(135deg, var(--teal), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        .subtitle { font-size: 24px; color: var(--text-dim); max-width: 800px; margin-bottom: 48px; font-weight: 300; }
+        .subtitle { font-size: 24px; color: var(--text-dim); max-width: 900px; margin-bottom: 56px; font-weight: 300; line-height: 1.5; }
 
-        .cta-group { display: flex; gap: 24px; }
+        .cta-group { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
         .btn { 
-            padding: 16px 32px; 
-            border-radius: 8px; 
-            font-size: 16px; 
-            font-weight: 600; 
+            padding: 20px 42px; 
+            border-radius: 14px; 
+            font-size: 14px; 
+            font-weight: 700; 
             text-decoration: none; 
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
         }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 150%; height: 150%;
+            background: rgba(255,255,255,0.1);
+            transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+            transition: transform 0.6s;
+        }
+        .btn:hover::before { transform: translate(-50%, -50%) rotate(45deg) translateY(-100%); }
+
         .btn-primary { 
-            background: var(--surface); 
-            color: var(--teal); 
+            background: var(--teal); 
+            color: var(--bg); 
             border: 1px solid var(--teal);
-            box-shadow: var(--glow);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
         }
-        .btn-primary:hover { background: rgba(6, 182, 212, 0.1); transform: translateY(-2px); }
+        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(6, 182, 212, 0.5); }
         
-        .btn-secondary { color: var(--text); border: 1px solid var(--border); }
-        .btn-secondary:hover { border-color: var(--text); }
+        .btn-secondary { color: var(--text); border: 1px solid var(--border); background: var(--glass); backdrop-filter: var(--glass-blur); }
+        .btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-3px); }
 
-        .section { padding: 120px 24px; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-size: 48px; text-align: center; margin-bottom: 64px; }
+        .section { padding: 160px 24px; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 64px; text-align: center; margin-bottom: 80px; letter-spacing: -2px; font-weight: 700; }
+        .section-title span { color: var(--teal); }
+        .section-subtitle { font-size: 18px; color: var(--text-dim); text-align: center; margin-top: -60px; margin-bottom: 80px; text-transform: uppercase; letter-spacing: 4px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
         
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 48px 32px;
-            backdrop-filter: blur(12px);
-            transition: all 0.4s;
+            border-radius: 24px;
+            padding: 60px 48px;
+            backdrop-filter: var(--glass-blur);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
-        .card:hover { border-color: var(--teal); transform: translateY(-5px); box-shadow: var(--glow); }
-        .card h3 { font-size: 24px; margin-bottom: 16px; color: var(--text); }
-        .card p { color: var(--text-dim); font-size: 16px; }
-        .card .icon { font-size: 48px; margin-bottom: 24px; }
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+        .card:hover { border-color: rgba(6, 182, 212, 0.3); transform: translateY(-12px); background: rgba(20, 25, 35, 0.8); }
+        .card:hover::after { transform: scaleX(1); }
+        
+        .card h3 { font-size: 28px; margin-bottom: 16px; color: var(--text); font-weight: 700; }
+        .card p { color: var(--text-dim); font-size: 17px; line-height: 1.8; }
+        .card .icon { font-size: 48px; margin-bottom: 32px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        .card .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--teal); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; }
 
-        .terminal-mockup {
-            background: #0d1117;
+        /* Pathway Section */
+        .pathway-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 60px; }
+        .pathway-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        .pathway-card:hover { background: rgba(255,255,255,0.05); border-color: var(--teal); }
+        .pathway-icon { width: 64px; height: 64px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .pathway-info h4 { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+        .pathway-info p { font-size: 14px; color: var(--text-dim); }
+
+        /* Showcase Section */
+        .showcase {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+            padding: 100px 60px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            margin: 100px 0;
+        }
+        .showcase-content { flex: 1; }
+        .showcase-visual { flex: 1; position: relative; }
+        .vault-orb {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--teal), var(--purple));
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: orb-pulse 10s infinite alternate;
+        }
+        @keyframes orb-pulse {
+            from { transform: scale(1) translate(0, 0); opacity: 0.2; }
+            to { transform: scale(1.3) translate(20px, -20px); opacity: 0.4; }
+        }
+        .fragment-grid {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .fragment {
+            width: 80px; height: 80px;
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
+            backdrop-filter: blur(10px);
+            animation: fragment-float 4s infinite ease-in-out;
+        }
+        @keyframes fragment-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Manifesto Section */
+        .manifesto {
+            background: var(--rose);
+            color: var(--bg);
+            padding: 160px 40px;
+            text-align: center;
+            border-radius: 40px;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .manifesto h2 { font-size: 88px; letter-spacing: -6px; margin-bottom: 40px; line-height: 0.9; }
+        .manifesto p { font-size: 28px; max-width: 1000px; margin: 0 auto 48px; font-weight: 600; }
+        .manifesto .decor { position: absolute; font-size: 200px; opacity: 0.1; font-weight: 900; pointer-events: none; }
+
+        .terminal-mockup {
+            background: #080808;
+            border: 1px solid var(--teal);
+            border-radius: 20px;
+            padding: 40px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 14px;
-            color: #e6edf3;
-            max-width: 800px;
+            color: #d1d5db;
+            max-width: 1000px;
             margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            position: relative;
         }
-        .term-header { color: var(--text-dim); margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-        .term-prompt { color: var(--teal); }
-        .term-success { color: #3fb950; }
+        .terminal-mockup::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 40px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid var(--border);
+        }
+        .term-header { color: var(--text-dim); margin-bottom: 24px; display: flex; gap: 10px; align-items: center; }
+        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .term-prompt { color: var(--teal); font-weight: bold; }
+        .term-success { color: #10b981; }
+        .term-comment { color: #6b7280; font-style: italic; }
 
-        footer { text-align: center; padding: 48px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 14px; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 12px; margin-top: 40px; }
+        th { padding: 24px; text-align: left; color: var(--text-dim); font-size: 13px; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; }
+        td { padding: 32px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); font-size: 18px; }
+        td:first-child { border-left: 1px solid var(--border); border-radius: 16px 0 0 16px; font-weight: 700; }
+        td:last-child { border-right: 1px solid var(--border); border-radius: 0 16px 16px 0; }
+
+        footer { padding: 120px 60px 60px; border-top: 1px solid var(--border); background: #050505; }
+        .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 60px; margin-bottom: 80px; }
+        .footer-col h4 { color: var(--text); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text-dim); text-decoration: none; transition: 0.3s; font-size: 15px; }
+        .footer-col ul li a:hover { color: var(--teal); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; color: var(--text-dim); font-size: 13px; }
+
+        @media (max-width: 1024px) {
+            h1 { font-size: 64px; }
+            .showcase { flex-direction: column; padding: 60px 30px; }
+            .manifesto h2 { font-size: 64px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; letter-spacing: -2px; }
+            .section-title { font-size: 40px; }
+            nav { padding: 20px 30px; }
+            .nav-links { display: none; }
+            .pathway-grid { grid-template-columns: 1fr; }
+            .manifesto h2 { font-size: 42px; }
+        }
     </style>
+
 </head>
 <body>
 
     <nav>
         <a href="#" class="logo">AE<span>THER</span></a>
         <div class="nav-links">
-            <a href="#features">Architecture</a>
-            <a href="#competitors">Why Switch?</a>
+            <a href="#pathways">Pathways</a>
+            <a href="#vault">Vault</a>
+            <a href="#shield">Shield</a>
+            <a href="#compare">Competitive</a>
             <a href="https://github.com/earnerbaymalay/aether-tauri">GitHub</a>
         </div>
     </nav>
 
+
     <section class="hero">
+        <div class="hero-glow"></div>
         <img src="assets/images/hero.svg" alt="Aether Neural OS" class="hero-img" onerror="this.style.display='none'">
-        <h1>Your Data. Your Rules.<br><span>Uncompromising Intelligence.</span></h1>
-        <p class="subtitle">Aether is a local-first Neural Operating Interface designed to rival Big Tech's closed ecosystems. Fusing a Rust desktop client with a self-healing Python neural engine.</p>
+        <h1>Architecting the<br><span>Sovereign Mind.</span></h1>
+        <p class="subtitle">Aether is a local-first Neural Operating Interface designed to rival Big Tech's closed ecosystems. A high-performance Rust workstation fused with a self-healing Python neural engine.</p>
         <div class="cta-group">
             <a href="https://github.com/earnerbaymalay/aether-tauri" class="btn btn-primary">Download Mission Control</a>
-            <a href="#features" class="btn btn-secondary">Explore the Engine Room</a>
+            <a href="#pathways" class="btn btn-secondary">Neural Pathways</a>
         </div>
     </section>
 
-    <section id="features" class="section">
-        <h2 class="section-title">Big AI is Obsolete.</h2>
+    <section id="pathways" class="section">
+        <p class="section-subtitle">Deep Intelligence</p>
+        <h2 class="section-title">The Four <span>Neural Pathways</span></h2>
         <div class="grid">
             <div class="card">
-                <div class="icon">🔒</div>
-                <h3>Absolute Privacy</h3>
-                <p>Zero telemetry. Zero API keys required. All logic, RAG indexing, and MCP tool execution happens on your local silicon. We don't share your data, and we block OS telemetry from taking it.</p>
+                <div class="tag">The Mastermind</div>
+                <div class="icon">💠</div>
+                <h3>AGENT (Hermes-3)</h3>
+                <p>The core of Aether's autonomy. Specialized in multi-step tool use, complex reasoning, and long-form planning. Your primary interface for high-level agency.</p>
             </div>
             <div class="card">
-                <div class="icon">🧠</div>
-                <h3>AetherVault (Local RAG)</h3>
-                <p>Big AI charges you for memory. Aether's Shadow Monitor passively distills your conversations into local Markdown fragments, retrieved instantly via RAG to give your agent infinite, context-aware memory.</p>
+                <div class="tag">The Speedster</div>
+                <div class="icon">⚡</div>
+                <h3>TURBO (Llama-3.2)</h3>
+                <p>Ultra-low latency intelligence. Ideal for instant summaries, quick questions, and real-time data processing without the overhead of larger models.</p>
             </div>
             <div class="card">
-                <div class="icon">⚕️</div>
-                <h3>Self-Healing Architecture</h3>
-                <p>Our Python Engine Room runs a continuous asynchronous watchdog. If a neural link drops or an MCP server hangs, Aether automatically restarts the service in the background.</p>
+                <div class="tag">The Specialist</div>
+                <div class="icon">💻</div>
+                <h3>CODE (Qwen-Coder)</h3>
+                <p>Precision-engineered for the modern stack. Generates clean diffs, performs deep refactoring, and understands complex polyglot architectures with ease.</p>
+            </div>
+            <div class="card">
+                <div class="tag">The Architect</div>
+                <div class="icon">🧬</div>
+                <h3>LOGIC (DeepSeek-R1)</h3>
+                <p>Advanced Chain-of-Thought (CoT) capability. Designed for architectural planning and solving intricate logical puzzles that stop standard models in their tracks.</p>
             </div>
         </div>
     </section>
 
-    <section class="section" style="background: rgba(6, 182, 212, 0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+
+    <section id="vault" class="section">
+        <p class="section-subtitle">Cognitive Persistence</p>
+        <div class="showcase">
+            <div class="showcase-content">
+                <h2 style="font-size: 56px; margin-bottom: 24px; letter-spacing: -2px;">AetherVault:<br><span>Infinite Context.</span></h2>
+                <p style="font-size: 18px; color: var(--text-dim); margin-bottom: 32px; line-height: 1.8;">Your brain is fragmented across a thousand apps. AetherVault brings it home. Our <strong>Shadow Monitor</strong> silently distills your digital footprint into high-density Markdown fragments, indexed locally for instant RAG retrieval.</p>
+                <div class="pathway-grid" style="grid-template-columns: 1fr;">
+                    <div class="pathway-card">
+                        <div class="pathway-icon" style="background: rgba(6, 182, 212, 0.1); color: var(--teal);">📂</div>
+                        <div class="pathway-info">
+                            <h4>Neural Distillation</h4>
+                            <p>Conversations are automatically refined into core insights, eliminating noise and preserving only what matters.</p>
+                        </div>
+                    </div>
+                    <div class="pathway-card">
+                        <div class="pathway-icon" style="background: rgba(139, 92, 246, 0.1); color: var(--purple);">🔍</div>
+                        <div class="pathway-info">
+                            <h4>Zero-Latency RAG</h4>
+                            <p>Retrieve any fact, code snippet, or decision from months ago in milliseconds. Local vector search, zero cloud round-trips.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-visual">
+                <div class="vault-orb"></div>
+                <div class="fragment-grid">
+                    <div class="fragment" style="animation-delay: 0s; opacity: 0.8; display: flex; align-items: center; justify-content: center;">📄</div>
+                    <div class="fragment" style="animation-delay: 0.5s; opacity: 0.5; display: flex; align-items: center; justify-content: center;">📝</div>
+                    <div class="fragment" style="animation-delay: 1s; opacity: 0.9; display: flex; align-items: center; justify-content: center;">📋</div>
+                    <div class="fragment" style="animation-delay: 1.5s; opacity: 0.4; display: flex; align-items: center; justify-content: center;">📄</div>
+                    <div class="fragment" style="animation-delay: 2s; opacity: 0.7; display: flex; align-items: center; justify-content: center;">📊</div>
+                    <div class="fragment" style="animation-delay: 2.5s; opacity: 0.6; display: flex; align-items: center; justify-content: center;">📝</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto">
+        <div class="decor" style="top: -50px; left: -20px;">NOT</div>
+        <div class="decor" style="bottom: -50px; right: -20px;">FOR SALE</div>
+        <h2>Your brain is not<br>a product.</h2>
+        <p>Big Tech wants your data to train their next cycle of profit. We want your data to serve YOU. Aether is built on the radical premise of <strong>Information Sovereignty</strong>. No accounts. No subscriptions. No compromise.</p>
+        <a href="#rebellion" class="btn btn-secondary" style="border-color: var(--bg); color: var(--bg);">Join the Sovereignty</a>
+    </section>
+
+
+    <section id="shield" class="section">
+        <p class="section-subtitle">Hardware Reclamation</p>
+        <h2 class="section-title">Nexus <span>Shield</span></h2>
+        <div class="grid">
+            <div class="card" style="border-color: var(--teal); box-shadow: var(--glow);">
+                <div class="icon">🛡️</div>
+                <h3>Ghost Mode</h3>
+                <p>Forcefully kills OS-level telemetry, "Recall" services, and hidden background reporting. Your hardware cycles belong to your agents, not Big Tech's trackers.</p>
+            </div>
+            <div class="card" style="border-color: var(--purple); box-shadow: var(--glow-purple);">
+                <div class="icon">🚀</div>
+                <h3>VRAM Liberation</h3>
+                <p>Automatically offloads non-essential system tasks to free up critical GPU memory. Run larger models with higher context windows on consumer hardware.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🌐</div>
+                <h3>AetherLink P2P</h3>
+                <p>Sync conversation state and Vault fragments to your mobile device over local Zeroconf. Fully encrypted, fully local. No cloud middlemen, ever.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="swarm" class="section" style="background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 80%);">
+        <p class="section-subtitle">Upcoming Phase</p>
+        <h2 class="section-title">Phase D: <span>Swarm Computing</span></h2>
+        <div class="terminal-mockup" style="border-color: var(--purple); max-width: 800px;">
+            <div class="term-header">
+                <span class="term-dot" style="background: var(--purple);"></span>
+                <span style="font-size: 12px; opacity: 0.6;">aether — status swarm-preview</span>
+            </div>
+            <div class="term-comment"># Scanning local area network for Aether nodes...</div>
+            <div><span class="term-prompt">❯</span> aether swarm join --id workstation-beta</div>
+            <div class="term-success">[SUCCESS] Linked to 3 nodes. Total Available Compute: 128GB VRAM.</div>
+            <div class="term-comment"># Distributing LOGIC pathway across swarm...</div>
+        </div>
+        <p style="text-align: center; max-width: 700px; margin: 40px auto 0; color: var(--text-dim); font-size: 18px;">Coming soon: Harness the collective power of every Aether-enabled device on your network. Share VRAM, distribute inference, and run monolithic models on a cluster of consumer machines.</p>
+    </section>
+
+
+    <section id="compare" class="section">
+        <h2 class="section-title">Aether vs. The Status Quo</h2>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th style="color: var(--teal); text-align: center;">Aether-Tauri</th>
+                        <th style="text-align: center;">Cloud AI</th>
+                        <th style="text-align: center;">Standard GUIs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>100% Local Privacy</td>
+                        <td style="color: var(--teal); text-align: center;">✅ YES</td>
+                        <td style="text-align: center;">❌ NO</td>
+                        <td style="text-align: center;">✅ YES</td>
+                    </tr>
+                    <tr>
+                        <td>Autonomous Agency</td>
+                        <td style="color: var(--teal); text-align: center;">✅ YES</td>
+                        <td style="text-align: center;">⚠️ LIMITED</td>
+                        <td style="text-align: center;">❌ NO</td>
+                    </tr>
+                    <tr>
+                        <td>Persistent Neural Memory</td>
+                        <td style="color: var(--teal); text-align: center;">✅ YES</td>
+                        <td style="text-align: center;">❌ NO</td>
+                        <td style="text-align: center;">❌ NO</td>
+                    </tr>
+                    <tr>
+                        <td>System Hardening</td>
+                        <td style="color: var(--teal); text-align: center;">✅ YES</td>
+                        <td style="text-align: center;">❌ NO</td>
+                        <td style="text-align: center;">❌ NO</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="section">
         <h2 class="section-title">Zero to Intelligence in 60s</h2>
         <div class="terminal-mockup">
-            <div class="term-header">user@macbook:~/workspace$</div>
+            <div class="term-header">
+                <div class="term-dot" style="background: #ff5f56;"></div>
+                <div class="term-dot" style="background: #ffbd2e;"></div>
+                <div class="term-dot" style="background: #27c93f;"></div>
+                <span style="margin-left: 10px; font-size: 12px; opacity: 0.5;">terminal — aether-init</span>
+            </div>
             <div><span class="term-prompt">❯</span> git clone https://github.com/earnerbaymalay/aether-tauri.git</div>
             <div><span class="term-prompt">❯</span> cd aether-tauri && npm install</div>
             <div><span class="term-prompt">❯</span> python3 api_server.py &</div>
@@ -191,9 +517,45 @@
     </section>
 
     <footer>
-        <p>Aether Neural OS. Built with ❤️ by the open-source rebellion.</p>
-        <p style="margin-top: 8px;">MIT Licensed • 2026.5.1</p>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom: 24px;">AE<span>THER</span></a>
+                <p style="color: var(--text-dim); font-size: 15px; max-width: 300px;">The local-first Neural Operating Interface for the era of sovereign intelligence.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#pathways">Neural Pathways</a></li>
+                    <li><a href="#vault">AetherVault</a></li>
+                    <li><a href="#shield">Nexus Shield</a></li>
+                    <li><a href="#swarm">Swarm (Beta)</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://github.com/earnerbaymalay/aether-tauri">Architecture</a></li>
+                    <li><a href="https://github.com/earnerbaymalay/aether-tauri">Documentation</a></li>
+                    <li><a href="https://github.com/earnerbaymalay/aether-tauri">GitHub</a></li>
+                    <li><a href="#">API Reference</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="#">Discord</a></li>
+                    <li><a href="#">Twitter / X</a></li>
+                    <li><a href="#">Matrix Space</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aether Neural OS. Built with ❤️ by the open-source rebellion.</p>
+            <p style="font-family: 'JetBrains Mono', monospace; opacity: 0.5;">v26.5.1-STABLE // MIT LICENSED</p>
+        </div>
     </footer>
+
 
 </body>
 </html>
