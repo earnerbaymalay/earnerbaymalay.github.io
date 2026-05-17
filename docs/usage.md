@@ -10,17 +10,19 @@
 
 If you haven't installed Aether yet, please start with the **[Getting Started Guide](docs/GETTING_STARTED.md)**.
 
-## 🚀 The Launch Sequence
+## 🚀 Launching the Application
 
-To launch Aether properly, ensure the OpenClaw bridge is running first:
+Once you have downloaded the correct application for your operating system from the [GitHub Releases](https://github.com/earnerbaymalay/aether-tauri/releases) page, follow these steps:
 
-```bash
-# 1. Start the OpenClaw gateway
-openclaw gateway --port 18789 --force &
+- **On Windows:** Unzip the package and run the `Aether.exe` executable. You can create a shortcut for easy access.
+- **On macOS:** Open the `.dmg` file and drag the `Aether.app` into your `Applications` folder.
+- **On Linux:** Make the `.AppImage` file executable (`chmod +x Aether.AppImage`) and then run it.
 
-# 2. Launch Aether
-./aether.sh
-```
+The application will handle starting all necessary background services for you.
+
+<div align="center">
+  <img src="docs//images/terminal_prompt.png" alt="Terminal Prompt" width="70%" />
+</div>
 
 ---
 
@@ -46,7 +48,7 @@ Aether comes with a standalone text-based dashboard to monitor your system's hea
 
 We recommend running this in a separate terminal window alongside Aether:
 
-![Neural Monitor](/images/neural_monitor.png)
+![Neural Monitor](docs//images/neural_monitor.png)
 
 ```bash
 # Run the monitor script directly
@@ -59,7 +61,12 @@ python3 tools/monitor.py
 
 When you launch Aether, you select a "Pathway". You can't change this mid-session (yet!), so choose the right tool for the job:
 
-- **🤖 AGENT:** Powered by `hermes3:8b`. This is your main assistant. Use it when you need Aether to use tools, search the web, or execute complex tasks.
+<div align="center">
+  <img src="docs//images/pathway_selection.png" alt="Pathway Selection" width="60%" />
+</div>
+
+- **🤖 AGENT:** Powered by `hermes3:8b`.
+ This is your main assistant. Use it when you need Aether to use tools, search the web, or execute complex tasks.
 - **⚡ TURBO:** Powered by `llama3.2:3b`. Extremely fast. Use it for quick questions, translations, or text summarization.
 - **💻 CODE:** Powered by `qwen2.5-coder:3b`. Highly optimized for writing scripts, finding bugs, and refactoring code.
 - **🧠 LOGIC:** Powered by `deepseek-r1:8b`. A slow, deep-thinking model best used for architectural planning and brainstorming.

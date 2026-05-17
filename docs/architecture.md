@@ -1,6 +1,6 @@
 <div align="center">
 
-![Architecture Diagram](assets/architecture_diagram.png)
+<img src="/images/architecture_diagram.png" alt="Architecture Diagram" width="80%" />
 
 # 🏛️ Aether — Architecture Guide
 
@@ -10,16 +10,13 @@
 
 ---
 
-## Table of Contents
+## 📐 Ecosystem Vision
 
-1. [System Overview](#-system-overview)
-2. [Layer Breakdown](#-layer-breakdown)
-3. [Data Flow Diagram](#-data-flow-diagram)
-4. [Agent Core Modules](#-agent-core-modules)
-5. [Frontend Design System](#-frontend-design-system)
-6. [Tauri Backend Commands](#-tauri-backend-commands)
-7. [Configuration & State](#-configuration--state)
-8. [Security Model](#-security-model)
+<div align="center">
+  <img src="/images/ecosystem-graphic.svg" alt="Aether Ecosystem" width="60%" />
+</div>
+
+Aether is designed as a **modular, self-healing neural ecosystem**. It prioritizes local execution, data sovereignty, and zero-latency interaction.
 
 ---
 
