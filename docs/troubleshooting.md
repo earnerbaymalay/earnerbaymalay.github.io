@@ -335,6 +335,4 @@ tail -f ~/.aether/logs/aether.log
 
 ---
 
-*Still stuck? Check [ARCHITECTURE.md](docs/ARCHITECTURE.md) for system internals, or open an issue on GitHub.*
-
-[MIT License](LICENSE)
+*Still stuck? Check [ARCHITECTURE.md](./architecture.md) for system internals, or open an issue on GitHub.*

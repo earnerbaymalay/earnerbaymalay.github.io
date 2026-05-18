@@ -8,7 +8,11 @@
 
 ---
 
-Once you've mastered the basics in the [Getting Started Guide](GETTING_STARTED.md), it's time to dive into the core technologies that make Aether a powerful neural workstation.
+::: warning ALPHA NOTICE
+**Aether is currently in Alpha.** Public binary releases are not yet available. Please follow the instructions in the [GitHub Repository](https://github.com/earnerbaymalay/aether-tauri) to build from source.
+:::
+
+Once you've mastered the basics in the [Getting Started Guide](./getting-started.md), it's time to dive into the core technologies that make Aether a powerful neural workstation.
 
 ---
 
@@ -77,4 +81,4 @@ When **Aether Eye** is triggered, it takes a fast, local screenshot and passes i
 
 ---
 
-*Ready to troubleshoot or dig into the code? Check the [Troubleshooting Guide](../TROUBLESHOOTING.md) or [Architecture Reference](ARCHITECTURE.md).*
+*Ready to troubleshoot or dig into the code? Check the [Troubleshooting Guide](./troubleshooting.md) or [Architecture Reference](./architecture.md).*

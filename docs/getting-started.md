@@ -1,5 +1,9 @@
 # Aether Neural OS — Onboarding Guide
 
+::: warning ALPHA NOTICE
+**Aether is currently in Alpha.** Public binary releases are not yet available. Please follow the instructions in the [GitHub Repository](https://github.com/earnerbaymalay/aether-tauri) to build from source.
+:::
+
 ## 🌌 Welcome to Aether
 Aether is not just another chat interface; it is a **Local-First Neural Operating Interface**. Unlike cloud-based LLMs, Aether lives on your hardware, giving you total privacy, zero latency, and a persistent cognitive memory.
 
